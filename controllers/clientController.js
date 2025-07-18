@@ -460,6 +460,41 @@ exports.changeClientStatus = async (req, res) => {
 
 // Trade Desk endpoints
 
+// Get all completed clients for Trade Desk
+exports.getTradeDeskCompletedClients = async (req, res) => {
+    try {
+        // Validate user role
+        if (!req.user || !req.user.role || req.user.role !== 'Trade Desk') {
+            return res.status(403).json({ 
+                message: 'Access denied',
+                error: 'Only Trade Desk users can access this endpoint'
+            });
+        }
+
+        // Get all clients with status 'completed'
+        const clients = await Client.find({
+            status: 'completed'
+        })
+        .populate('createdBy', 'name role')
+        .populate('lastModifiedBy', 'name role')
+        .sort({ updatedAt: -1 });
+
+        res.status(200).json({ 
+            success: true,
+            count: clients.length,
+            clients 
+        });
+    } catch (error) {
+        console.error('Error getting Trade Desk completed clients:', error);
+        res.status(500).json({ 
+            success: false,
+            message: 'Server error',
+            error: error.message
+        });
+    }
+};
+
+
 exports.getTradeDeskAssignedClients = async (req, res) => {
     try {
         // Validate user role

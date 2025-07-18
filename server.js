@@ -46,6 +46,7 @@ clientRoutes.use('/treasury-officer/forward', roleCheck(['Treasury Officer']));
 
 // Apply role-based access control for Trade Desk routes
 clientRoutes.use('/trade-desk/assigned', roleCheck(['Trade Desk']));
+clientRoutes.use('/trade-desk/completed', roleCheck(['Trade Desk']));
 clientRoutes.use('/trade-desk/change-status', roleCheck(['Trade Desk']));
 clientRoutes.use('/trade-desk/delete', roleCheck(['Trade Desk']));
 clientRoutes.use('/trade-desk/note', roleCheck(['Trade Desk']));

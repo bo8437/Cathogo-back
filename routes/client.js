@@ -21,6 +21,7 @@ router.get('/:id', clientController.getClient);
 
 // Trade Desk routes
 router.get('/trade-desk/assigned', clientController.getTradeDeskAssignedClients);
+router.get('/trade-desk/completed', clientController.getTradeDeskCompletedClients);
 router.post('/trade-desk/change-status', clientController.changeTradeDeskClientStatus);
 router.post('/trade-desk/delete', clientController.deleteTradeDeskClient);
 router.post('/trade-desk/note', clientController.addTradeDeskNote);
