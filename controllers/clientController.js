@@ -255,10 +255,7 @@ exports.sendBackToAgent = async (req, res) => {
             return res.status(404).json({ message: 'Client not found' });
         }
 
-        // Check if client belongs to this user
-        if (client.createdBy.toString() !== req.user._id) {
-            return res.status(403).json({ message: 'Access denied' });
-        }
+        // Remove client ownership check since Treasury OPS should be able to send back any client
 
         // Add comment
         client.comments.push({
