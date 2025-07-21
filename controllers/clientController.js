@@ -186,9 +186,12 @@ exports.downloadDocument = async (req, res) => {
         const stats = fs.statSync(filePath);
         
         // Set appropriate headers for download
+        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+        res.setHeader('Access-Control-Allow-Credentials', 'true');
         res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
         res.setHeader('Content-Type', 'application/pdf');
         res.setHeader('Content-Length', stats.size);
+        
 
         // Stream the file
         const fileStream = fs.createReadStream(filePath);

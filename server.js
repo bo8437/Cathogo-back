@@ -10,16 +10,20 @@ const app = express();
 
 // CORS middleware
 app.use(cors({
-    origin: ['http://localhost:5173'], // Vite default port
+    origin: ['http://localhost:5173', 'http://localhost:3000'], // Vite default port
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    exposedHeaders: ['Content-Disposition'] // Important for file downloads
 }));
 
 
 // Middleware
 app.use(express.json());
 app.use(express.static('uploads')); // Serve uploaded files
+
+
+
 
 console.log('Server starting up...');
 
